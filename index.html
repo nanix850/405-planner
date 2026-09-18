@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4f46e5">
+  <title>405 Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div><strong>405 Planner</strong><span class="subtitle">Organisation de la classe</span></div>
+    <button id="themeBtn" class="icon-btn" title="Changer de thème">🌙</button>
+  </header>
+
+  <main class="container">
+    <section id="dashboard" class="page active">
+      <div class="hero">
+        <div><p class="eyebrow">Bienvenue</p><h1>Organise ta semaine.</h1><p>Devoirs, révisions et emploi du temps au même endroit.</p></div>
+        <button class="primary" data-go="devoirs">+ Ajouter un devoir</button>
+      </div>
+      <div class="stats">
+        <article><span>Devoirs à faire</span><strong id="statTodo">0</strong></article>
+        <article><span>Révisions prévues</span><strong id="statRevision">0</strong></article>
+        <article><span>Prochaine échéance</span><strong id="statNext">—</strong></article>
+      </div>
+      <div class="grid two">
+        <section class="card"><div class="section-title"><h2>À venir</h2><button class="text-btn" data-go="devoirs">Voir tout</button></div><div id="upcoming"></div></section>
+        <section class="card"><div class="section-title"><h2>Prochaines révisions</h2><button class="text-btn" data-go="revisions">Voir tout</button></div><div id="nextRevisions"></div></section>
+      </div>
+    </section>
+
+    <section id="devoirs" class="page">
+      <div class="section-title"><div><p class="eyebrow">Travail scolaire</p><h1>Mes devoirs</h1></div><button class="primary" id="addHomeworkBtn">+ Ajouter</button></div>
+      <div class="card"><div id="homeworkList"></div></div>
+    </section>
+
+    <section id="revisions" class="page">
+      <div class="section-title"><div><p class="eyebrow">Préparation</p><h1>Mes révisions</h1></div><button class="primary" id="addRevisionBtn">+ Ajouter</button></div>
+      <div class="card"><div id="revisionList"></div></div>
+    </section>
+
+    <section id="emploi" class="page">
+      <div class="section-title"><div><p class="eyebrow">Semaine</p><h1>Emploi du temps</h1></div><button class="primary" id="addScheduleBtn">+ Ajouter un cours</button></div>
+      <div class="card"><p class="muted">Ajoute tes cours pour avoir une copie de secours de ton emploi du temps, même si Pronote ne fonctionne pas.</p><div id="scheduleGrid" class="schedule"></div></div>
+    </section>
+
+    <section id="reglages" class="page">
+      <p class="eyebrow">Personnalisation</p><h1>Réglages</h1>
+      <div class="card settings"><h2>Données</h2><p class="muted">Tout est enregistré dans ce navigateur. Aucune inscription n'est nécessaire.</p><div class="actions"><button class="secondary" id="exportBtn">Exporter mes données</button><label class="secondary file-label">Importer <input type="file" id="importInput" accept=".json"></label><button class="danger" id="resetBtn">Tout effacer</button></div></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav active" data-go="dashboard">⌂<span>Accueil</span></button>
+    <button class="nav" data-go="devoirs">✓<span>Devoirs</span></button>
+    <button class="nav" data-go="revisions">⏱<span>Révisions</span></button>
+    <button class="nav" data-go="emploi">▦<span>Emploi du temps</span></button>
+    <button class="nav" data-go="reglages">⚙<span>Réglages</span></button>
+  </nav>
+
+  <dialog id="homeworkDialog"><form method="dialog" id="homeworkForm" class="modal"><button class="close" value="cancel">×</button><h2>Nouveau devoir</h2><label>Matière<input name="subject" required maxlength="40" placeholder="Mathématiques"></label><label>Description<input name="title" required maxlength="100" placeholder="Exercices 1 à 5"></label><label>Date limite<input name="due" type="date" required></label><div class="actions"><button class="secondary" value="cancel">Annuler</button><button class="primary" value="default">Ajouter</button></div></form></dialog>
+  <dialog id="revisionDialog"><form method="dialog" id="revisionForm" class="modal"><button class="close" value="cancel">×</button><h2>Nouvelle révision</h2><label>Matière<input name="subject" required maxlength="40"></label><label>Date<input name="date" type="date" required></label><label>Durée (minutes)<input name="duration" type="number" min="5" max="480" value="30" required></label><div class="actions"><button class="secondary" value="cancel">Annuler</button><button class="primary" value="default">Ajouter</button></div></form></dialog>
+  <dialog id="scheduleDialog"><form method="dialog" id="scheduleForm" class="modal"><button class="close" value="cancel">×</button><h2>Ajouter un cours</h2><label>Jour<select name="day"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option></select></label><label>Heure<input name="time" type="time" required></label><label>Matière<input name="subject" required maxlength="40"></label><label>Salle (facultatif)<input name="room" maxlength="20"></label><div class="actions"><button class="secondary" value="cancel">Annuler</button><button class="primary" value="default">Ajouter</button></div></form></dialog>
+  <script src="script.js"></script>
+</body>
+</html>
